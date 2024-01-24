@@ -66,7 +66,7 @@ module.exports = {
 				id: "books::BooksDetailsList--fe::StandardAction::Edit"
 			}
 		}).getEnabled();
-		expect(enabled).toBeTruthy();
+		expect(enabled).toBeDisplayedInViewport();
 	},
 
 	iNavigateBack: async () => {

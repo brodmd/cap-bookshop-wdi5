@@ -18,13 +18,13 @@
     "@sap/cds-dk": "*",
     "@sap/cds-odata-v2-adapter-proxy": "*",
     "@sap/xssec": "^3",
-    "@wdio/junit-reporter": "^8.27.0",
     "express": "^4.17.1",
     "passport": ">=0.4.1",
-    "sqlite3": "^5",
-    "wdio-html-nice-reporter": "^8.1.3-beta"
+    "sqlite3": "^5"
   },
   "devDependencies": {
+	"wdio-html-nice-reporter": "^8.1.3-beta",
+    "@wdio/junit-reporter": "^8.27.0",
     "@microfocus/alm-octane-js-rest-sdk": "^23.3.1",
     "@microfocus/alm-octane-test-result-convertion": "^1.0.1",
     "@sap/ux-specification": "^1.102.14",

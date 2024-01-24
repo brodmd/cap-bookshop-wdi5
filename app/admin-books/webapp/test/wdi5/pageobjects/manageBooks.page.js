@@ -16,17 +16,19 @@ module.exports = {
 	},
 
 	theBookListContains: async (book_title) => {
-		await browser.asControl({
+		result = await browser.asControl({
 			selector: {
 				controlType: "sap.m.Link",
 				viewName: "sap.fe.templates.ListReport.ListReport",
 				viewId: "books::BooksList",
 				properties: {
-					text: "How to Cook Pancakes"
+					text: book_title
 				}
 			}
-		}).toBeTruthy();
+		})
+		expect(result).toBeDisplayedInViewport()
 	},
+
 
 	/**
 	 * define assertions for the page object

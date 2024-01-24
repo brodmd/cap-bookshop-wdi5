@@ -71,42 +71,20 @@ class SoproOctane {
 	static user = "OCT_API_user";
 	static password = "OCT_API_password";
 	static sharedSpace = "OCT_SHARED_SPACE";
+	static workSpace = "OCT_WORKSPACE"
 
-	constructor(sharedSpace) {
+	constructor(workpsaceID) {
 		this.server = new Octane({
 			server: "https://almoctane-eur.saas.microfocus.com",
-			sharedSpace: getEnvVar(this.sharedSpace),
-			workspace: sharedSpace,
-			user: getEnvVar(this.user),
-			password: getEnvVar(this.password)
+			sharedSpace: getEnvVar(SoproOctane.sharedSpace),
+			workspace: getEnvVar(SoproOctane.workSpace),
+			user: getEnvVar(SoproOctane.user),
+			password: getEnvVar(SoproOctane.password)
 			,
 			headers: {
 				ALM_OCTANE_TECH_PREVIEW: true,
 			},
 		});
-	}
-
-	async checkServerConnection() {
-		try {
-			await this.server.authenticate();
-		} catch (err) {
-			console.error("Connection Error with server: \n", err); // TypeError: failed to fetch
-		}
-	}
-
-	async checkAutoTestExists(testName) {
-		let automatedTests = await this.server
-			.get(Octane.entityTypes.tests) //get all tests
-			.query(Query.field("subtype").equal("test_automated").build()) //query all automated tests
-			.fields("name")
-			.execute();
-
-		let automationTestNames = Object.values(automatedTests.data);
-
-		for (let testCase of automationTestNames) {
-			if (testCase.name === testName) return true;
-		}
-		return false;
 	}
 }
 
@@ -116,13 +94,13 @@ async function uploadWdi5ResultsToOctane(worskpaceID) {
 		throw Error("Error no workspace ID entered")
 	}
 
-	let octaneConn = new SoproOctane(worskpaceID);
+	let octaneConn = new SoproOctane();
 	let octaneReportPath = "./test_reports/junit/test-results.xml"
 	let testReport = transformJunitToOctaneReport(octaneReportPath)
 	console.log("start upload test results")
 	try {
 		await octaneConn.server.executeCustomRequest(
-			`/api/shared_spaces/${SoproOctane.octaneSharedSpace}/${worskpaceID}/test-results`,
+			`/api/shared_spaces/${getEnvVar(SoproOctane.sharedSpace)}/workspaces/${worskpaceID}/test-results`,
 			Octane.operationTypes.create,
 			testReport
 			,
@@ -138,4 +116,3 @@ async function uploadWdi5ResultsToOctane(worskpaceID) {
 }
 
 module.exports = { uploadWdi5ResultsToOctane }
-

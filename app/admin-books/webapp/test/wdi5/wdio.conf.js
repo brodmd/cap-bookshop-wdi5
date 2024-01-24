@@ -318,10 +318,10 @@ exports.config = {
 		// Octane workspaces IDs
 		function getWorkspace() {
 			if ("OCT_WORKSPACE" in process.env) {
-				console.log(`Success, env [${environmentVariable}] found!`);
-				return process.env[environmentVariable]
+				console.log(`Success, env [OCT_WORKSPACE] found!`);
+				return process.env["OCT_WORKSPACE"]
 			} else {
-				throw Error(`Error, env [${environmentVariable}] not found!`)
+				throw Error(`Error, env [OCT_WORKSPACE] not found!`)
 			}
 		}
 		await uploadWdi5ResultsToOctane(getWorkspace())

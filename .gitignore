@@ -1,5 +1,4 @@
 node_modules
-target
 .DS_Store
 .vscode
 gen
@@ -8,3 +7,4 @@ mta_archives
 resources
 wdi5.db
 .cdsrc-private.json
+test_reports

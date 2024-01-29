@@ -37,16 +37,14 @@ module.exports = {
 
 		await browser.asControl({
 			selector: {
-				controlType: "sap.fe.macros.controls.FieldWrapper",
-				viewName: "sap.fe.templates.ObjectPage.ObjectPage",
+				controlType: "sap.fe.core.controls.FieldWrapper",
 				viewId: "books::BooksDetailsList",
 				searchOpenDialogs: true,
 				ancestor: {
-					id: "books::BooksDetailsList--fe::FormContainer::FieldGroup::General::FieldValueHelp::author_ID::Dialog::qualifier::::Table-innerTable-rows-row2",
-					searchOpenDialogs: true
+						id: "books::BooksDetailsList--fe::FormContainer::FieldGroup::General::FieldValueHelp::author_ID::Dialog::qualifier::::Table-innerTable-rows-row2",
+						searchOpenDialogs: true
 				}
-			}
-		}).press();
+		}}).press();
 	},
 
 	iPressCreate: async () => {
